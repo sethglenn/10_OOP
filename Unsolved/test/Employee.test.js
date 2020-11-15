@@ -1,5 +1,22 @@
 const Employee = require("../lib/Employee");
 
+class Employee {
+  constructor(name, id, email){
+    this.name = name;
+    this.id = id;
+    this.email = email;
+  }
+  getName() {}
+  getId() {}
+  getEmail() {}
+  getRole() {
+    return this.getRole;
+  }
+
+
+
+}
+
 test("Can instantiate Employee instance", () => {
   const e = new Employee();
   expect(typeof(e)).toBe("object");

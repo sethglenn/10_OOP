@@ -1,6 +1,14 @@
 const Manager = require("../lib/Manager");
 const Employee = require("../lib/Employee");
 
+class Manager extends Employee {
+  constructor(name, id, email, officeNum){
+    super (name, id, email)
+    this.officeNum = officeNum;
+  }
+
+}
+
 test("Can set office number via constructor argument", () => {
   const testValue = 100;
   const e = new Manager("Foo", 1, "test@test.com", testValue);
@@ -18,3 +26,5 @@ test("Can get office number via getOffice()", () => {
   const e = new Manager("Foo", 1, "test@test.com", testValue);
   expect(e.getOfficeNumber()).toBe(testValue);
 });
+
+module.exports = Manager;
