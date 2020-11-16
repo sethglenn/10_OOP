@@ -14,6 +14,7 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
+
 inquirer.prompt([
     {
         type: "list",
@@ -37,7 +38,7 @@ inquirer.prompt([
 
 ])
 .then((answers) => {
-    const employees = [];
+    const employeesTwo = [];
 
     if (answers.employeeType === "Manager") {
         inquirer.prompt([
@@ -99,7 +100,9 @@ inquirer.prompt([
         ])
 
     }
-    return employees;
+    employeesTwo.push(answers);
+
+    return employeesTwo;
 })
 
 // .then((answers) => fs.writeFile("./manager.html", answers))
