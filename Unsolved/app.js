@@ -17,6 +17,15 @@ const render = require("./lib/htmlRenderer");
 inquirer.prompt([
     {
         type: "list",
+        message: "Would you like to add another employee?",
+        name: "employeeAdd",
+        choices: [
+            "Yes",
+            "No",
+        ]
+    },
+    {
+        type: "list",
         message: "What type of employee would you like to add?",
         name: "employeeType",
         choices: [
@@ -27,10 +36,16 @@ inquirer.prompt([
     },
 
 ])
-
 .then((answers) => {
+    const employees = [];
+
     if (answers.employeeType === "Manager") {
         inquirer.prompt([
+            {
+                type: "input",
+                message: "What is your name?",
+                name: "managerName",
+            },
             {
                 type: "input",
                 message: "What is your email?",
@@ -48,6 +63,11 @@ inquirer.prompt([
         inquirer.prompt([
             {
                 type: "input",
+                message: "What is your name?",
+                name: "engineerName",
+            },
+            {
+                type: "input",
                 message: "What is your email?",
                 name: "engineerEmail",
             },
@@ -62,6 +82,11 @@ inquirer.prompt([
         inquirer.prompt([
             {
                 type: "input",
+                message: "What is your name?",
+                name: "internName",
+            },
+            {
+                type: "input",
                 message: "What is your email?",
                 name: "internEmail",
             },
@@ -74,12 +99,20 @@ inquirer.prompt([
         ])
 
     }
-
+    return employees;
 })
+
+// .then((answers) => fs.writeFile("./manager.html", answers))
+// .then((answers) => fs.writeFile("./engineer.html", answers))
+// .then((answers) => fs.writeFile("./intern.html", answers));
 
     // After the user has input all employees desired, call the `render` function (required
     // above) and pass in an array containing all employee objects; the `render` function will
     // generate and return a block of HTML including templated divs for each employee!
+
+.then((answers) => render(answers))
+
+.catch((err) => console.log(err));
 
     // After you have your html, you're now ready to create an HTML file using the HTML
     // returned from the `render` function. Now write it to a file named `team.html` in the
