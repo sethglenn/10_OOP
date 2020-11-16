@@ -1,4 +1,12 @@
-const Engineer = require("../lib/Engineer");
+const Employee = require("../lib/Employee");
+
+class Engineer extends Employee{
+  constructor(name, id, email, gitHub){
+    super (name, id, email)
+    this.gitHub = gitHub;
+  }
+
+}
 
 test("Can set GitHUb account via constructor", () => {
   const testValue = "GitHubUser";
@@ -17,3 +25,5 @@ test("Can get GitHub username via getGithub()", () => {
   const e = new Engineer("Foo", 1, "test@test.com", testValue);
   expect(e.getGithub()).toBe(testValue);
 });
+
+module.exports = Engineer;
