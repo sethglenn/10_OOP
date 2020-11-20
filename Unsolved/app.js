@@ -62,10 +62,8 @@ inquirer.prompt([
         ]).then((answers) => {
             const manager = new Manager(answers);
             employeesTwo.push(manager);
-            
-            render(employeesTwo);
 
-            writeFileAsync(outputPath);
+            writeFileAsync("./manager.html", render(employeesTwo));
         })
     }
     if (answers.employeeType === "Engineer") {
@@ -86,6 +84,12 @@ inquirer.prompt([
                 name: "engineerGitHub",
             }
         ])
+        .then((answers) => {
+            const engineer = new Engineer(answers);
+            employeesTwo.push(engineer);
+
+            writeFileAsync("./engineer.html", render(employeesTwo));
+        })
     }
     if (answers.employeeType === "Intern") {
         inquirer.prompt([
@@ -106,6 +110,12 @@ inquirer.prompt([
             }
 
         ])
+        .then((answers) => {
+            const intern = new Intern(answers);
+            employeesTwo.push(intern);
+
+            writeFileAsync("./intern.html", render(employeesTwo));
+        })
 
     }
 
@@ -127,8 +137,7 @@ inquirer.prompt([
     // `output` folder. You can use the variable `outputPath` above target this location.
     // Hint: you may need to check if the `output` folder exists and create it if it
     // does not.
-// fs.readFile("./manager.html", "utf8")
-// fs.writeFile("./team.html", "utf8")
+
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
