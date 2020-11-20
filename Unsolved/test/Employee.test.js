@@ -1,15 +1,22 @@
 
 class Employee {
-  constructor(name, id, email){
+  constructor(name, id, email) {
     this.name = name;
     this.id = id;
     this.email = email;
   }
-  getName() {}
-  getId() {}
-  getEmail() {}
+
+  getName() {
+    return this.name;
+  }
+  getId() {
+    return this.id;
+  }
+  getEmail() {
+    return this.email;
+  }
   getRole() {
-    return this.getRole;
+    return "Employee";
   }
 
 
@@ -18,7 +25,7 @@ class Employee {
 
 test("Can instantiate Employee instance", () => {
   const e = new Employee();
-  expect(typeof(e)).toBe("object");
+  expect(typeof (e)).toBe("object");
 });
 
 test("Can set name via constructor arguments", () => {
@@ -62,3 +69,5 @@ test("getRole() should return \"Employee\"", () => {
   const e = new Employee("Alice", 1, "test@test.com");
   expect(e.getRole()).toBe(testValue);
 });
+
+module.exports = Employee;
