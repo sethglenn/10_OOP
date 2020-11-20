@@ -4,6 +4,8 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const util = require("util");
+const writeFileAsync = util.promisify(fs.writeFile);
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -58,7 +60,12 @@ inquirer.prompt([
             }
 
         ]).then((answers) => {
-            const manager = Manager(answers) 
+            const manager = new Manager(answers);
+            employeesTwo.push(manager);
+            
+            render(employeesTwo);
+
+            writeFileAsync(outputPath);
         })
     }
     if (answers.employeeType === "Engineer") {
@@ -101,7 +108,6 @@ inquirer.prompt([
         ])
 
     }
-    employeesTwo.push(answers);
 
     return employeesTwo;
 })
@@ -121,7 +127,8 @@ inquirer.prompt([
     // `output` folder. You can use the variable `outputPath` above target this location.
     // Hint: you may need to check if the `output` folder exists and create it if it
     // does not.
-
+// fs.readFile("./manager.html", "utf8")
+// fs.writeFile("./team.html", "utf8")
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
