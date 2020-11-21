@@ -8,7 +8,7 @@ const util = require("util");
 const writeFileAsync = util.promisify(fs.writeFile);
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+const outputPath = path.join(OUTPUT_DIR, "main.html");
 
 const render = require("./lib/htmlRenderer");
 const employeesTwo = [];
@@ -46,21 +46,27 @@ inquirer.prompt([
             {
                 type: "input",
                 message: "What is your name?",
-                name: "managerName",
+                name: "name",
+            },
+            {
+                type: "input",
+                message: "What is your id?",
+                name: "id",
             },
             {
                 type: "input",
                 message: "What is your email?",
-                name: "managerEmail",
+                name: "email",
             },
             {
                 type: "input",
                 message: "What is your office number?",
-                name: "managerOffice"
+                name: "officeNumber"
             }
 
-        ]).then((answers) => {
-            const manager = new Manager(answers);
+        ]).then(answers => {
+            var {name, id, email, officeNumber} = answers;
+            const manager = new Manager(name, id, email, officeNumber);
             employeesTwo.push(manager);
 
             writeFileAsync("./manager.html", render(employeesTwo));
@@ -71,21 +77,27 @@ inquirer.prompt([
             {
                 type: "input",
                 message: "What is your name?",
-                name: "engineerName",
+                name: "name",
+            },
+            {
+                type: "input",
+                message: "What is your id?",
+                name: "id",
             },
             {
                 type: "input",
                 message: "What is your email?",
-                name: "engineerEmail",
+                name: "email",
             },
             {
                 type: "input",
                 message: "What is your GitHub username?",
-                name: "engineerGitHub",
+                name: "gitHub",
             }
         ])
-        .then((answers) => {
-            const engineer = new Engineer(answers);
+        .then(answers => {
+            var {name, id, email, gitHub} = answers;
+            const engineer = new Engineer(name, id, email, gitHub);
             employeesTwo.push(engineer);
 
             writeFileAsync("./engineer.html", render(employeesTwo));
@@ -96,22 +108,28 @@ inquirer.prompt([
             {
                 type: "input",
                 message: "What is your name?",
-                name: "internName",
+                name: "name",
+            },
+            {
+                type: "input",
+                message: "What is your id?",
+                name: "id",
             },
             {
                 type: "input",
                 message: "What is your email?",
-                name: "internEmail",
+                name: "email",
             },
             {
                 type: "input",
                 message: "What is your school?",
-                name: "internSchool",
+                name: "school",
             }
 
         ])
         .then((answers) => {
-            const intern = new Intern(answers);
+            var {name, id, email, school} = answers;
+            const intern = new Intern(name, id, email, school);
             employeesTwo.push(intern);
 
             writeFileAsync("./intern.html", render(employeesTwo));
